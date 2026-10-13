@@ -3,6 +3,15 @@
 All notable changes to costbomb are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/); versions follow SemVer.
 
+## [Unreleased]
+
+### Added
+- Price-table **model-id resolution**: real, date/version-suffixed model ids
+  (`claude-opus-4-8-20250514`, `gpt-4o-mini-2024-07-18`) resolve to their base entry
+  via boundary-safe longest-prefix matching, so the meter and proxy price real-world
+  traffic. Genuinely unknown models still raise `UnpricedModelError` (never a silent $0),
+  and `gpt-4o` never matches a `gpt-4` entry.
+
 ## [0.2.0] — 2026-09-07
 
 First public release — the standalone extract of denial-of-wallet fuzzing.

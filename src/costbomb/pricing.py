@@ -90,20 +90,36 @@ class PriceTable(BaseModel):
 
     # ---- lookup ----
 
+    def resolve_model_key(self, model_id: str) -> str | None:
+        """Map a real-world model id to a table key, or None if genuinely unknown.
+
+        Real ids carry date/version suffixes the table doesn't list verbatim
+        (``claude-opus-4-8-20250514``, ``gpt-4o-mini-2024-07-18``). We match a table
+        key that is ``model_id`` itself or a prefix **at a ``-`` boundary**, longest
+        first — so a suffixed id resolves to its base price, but boundary-safety keeps
+        ``gpt-4o`` from ever matching a ``gpt-4`` entry. Exact match always wins.
+        """
+        if model_id in self.models:
+            return model_id
+        candidates = [k for k in self.models if model_id.startswith(f"{k}-")]
+        return max(candidates, key=len) if candidates else None
+
     def model(self, model_id: str) -> ModelPrice:
         """Prices for ``model_id`` (e.g. ``anthropic:claude-opus-4-8``).
 
-        Raises :class:`UnpricedModelError` for an unknown model — the meter must
-        never silently treat an unpriced model as free (UT-CM-6).
+        Resolves date/version-suffixed real ids to their base entry
+        (:meth:`resolve_model_key`). Raises :class:`UnpricedModelError` for a model
+        that still doesn't resolve — the meter must never silently treat an unpriced
+        model as free (UT-CM-6).
         """
-        try:
-            return self.models[model_id]
-        except KeyError as exc:
-            known = ", ".join(sorted(self.models)) or "(none)"
-            raise UnpricedModelError(
-                f"model {model_id!r} not in price table {self.version!r}; "
-                f"known models: {known}. Add it or pass --price-table."
-            ) from exc
+        key = self.resolve_model_key(model_id)
+        if key is not None:
+            return self.models[key]
+        known = ", ".join(sorted(self.models)) or "(none)"
+        raise UnpricedModelError(
+            f"model {model_id!r} not in price table {self.version!r}; "
+            f"known models: {known}. Add it or pass --price-table."
+        )
 
     def tool_price(self, tool_name: str) -> float:
         """Fee for one call to ``tool_name``. Unknown tools default to $0.
