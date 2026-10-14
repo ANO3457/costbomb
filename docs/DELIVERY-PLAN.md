@@ -1,5 +1,9 @@
 # costbomb — DELIVERY PLAN
 
+> **Live status (2026-10-14):** M0–M2 delivered and **v0.2.0 shipped to PyPI**; M1 embedded in
+> stampede. See [`ROADMAP.md`](../ROADMAP.md) for the up-to-date done/remaining backlog. The one
+> open gate: the meter is **not yet validated against real invoices** (`0/20`).
+
 *Milestones, WBS, sequencing, and the two-launches-one-codebase plan. Companion to [`ARCHITECTURE.md`](./ARCHITECTURE.md) and the portfolio roadmap.*
 *Effort in ideal engineering-days (IED), sized for one senior engineer working alongside Xerberus (evenings/weekends cadence). `⊕` = beyond original SPEC.*
 
