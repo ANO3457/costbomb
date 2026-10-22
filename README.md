@@ -159,6 +159,10 @@ blast radius against Stripe test-mode). Add real fixtures via
 
 ## Design docs
 
+Custom model/tool rates and units are documented in the
+[provider price-table guide](docs/PRICE-TABLE.md), with a runnable arithmetic
+example that makes no paid calls.
+
 [`SPEC.md`](./SPEC.md) · [`docs/PRD.md`](./docs/PRD.md) (REQ/NFR IDs) · [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) (ADRs) · [`docs/DELIVERY-PLAN.md`](./docs/DELIVERY-PLAN.md) · [`docs/TEST-PLAN.md`](./docs/TEST-PLAN.md) · [`CLAUDE.md`](./CLAUDE.md).
 
 ## Development

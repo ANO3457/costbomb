@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "version": "documentation-example-v1",
+    "source": "Illustrative arithmetic only; not a provider quote"
+  },
+  "models": {
+    "example:demo-model": {
+      "input_cost_per_token": 0.000002,
+      "output_cost_per_token": 0.000006,
+      "reasoning_cost_per_token": 0.000008,
+      "cache_read_cost_per_token": 0.0000005,
+      "cache_write_cost_per_token": 0.000003
+    }
+  },
+  "tools": {
+    "example_tool": {
+      "price_per_call": 0.01,
+      "downstream_usd": 0.25,
+      "side_effecting": true
+    }
+  },
+  "infra": {"usd_per_second": 0.002}
+}
