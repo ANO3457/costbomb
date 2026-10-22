@@ -13,7 +13,7 @@ costbomb price --price-table examples/prices_documented.json
 
 `price` prints the version, source, and known model/tool names; it does not run a
 target. To use a table for measurement, pass `--price-table FILE.json` to `run`,
-`replay`, or `proxy` as appropriate. A supplied file **replaces** the vendored
+`estimate`, or `proxy` as appropriate. A supplied file **replaces** the vendored
 table rather than merging with it. Include every model your target can use.
 
 ## Fields and units
