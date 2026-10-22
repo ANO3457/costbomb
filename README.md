@@ -54,6 +54,9 @@ Template mutation is the default and needs no LLM. `--use-llm` lets a cheap/loca
 
 Your agent's handler returns what it *spent* (a `RunRecord` of model calls, tool calls, and sub-agent spawns), or emits the OTel GenAI trace directly. costbomb meters that truthfully — see [`examples/demo_agent.py`](./examples/demo_agent.py).
 
+For a no-model-server smoke check, see the [dry-run estimation guide](docs/DRY-RUN.md),
+including JSON output, gate exit codes, and the difference between estimated and measured cost.
+
 ## The attack library
 
 Named cost-explosion classes, each a seed strategy the fuzz engine mutates toward maximum spend:
